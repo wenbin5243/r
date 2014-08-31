@@ -1,0 +1,5 @@
+library(ggplot2)
+library(gcookbook)
+library(plyr)
+ce <- ddply(cabbage_exp,"Date",transform,percent_weight=Weight/sum(Weight)*100)
+ggplot(ce,aes(x=Date,y=percent_weight,fill=Cultivar))+geom_bar(stat="identity")
