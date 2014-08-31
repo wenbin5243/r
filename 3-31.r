@@ -1,0 +1,6 @@
+library(ggplot2)
+library(gcookbook)
+library(plyr)
+ce <- arrange(cabbage_exp,Date,Cultivar)
+ce <- ddply(ce,"Date",transform,label_y=cumsum(Weight)-0.5*Weight)
+ggplot(ce,aes(x=Date,y=Weight,fill=Cultivar))+geom_bar(stat="identity",color="black")+geom_text(aes(y=label_y,label=paste(format(Weight,nsmall=2),"kg")),size=4)+guides(fill=guide_legend(reverse=TRUE))+scale_fill_brewer(palette="Pastell")
